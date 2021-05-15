@@ -1,0 +1,65 @@
+Installation of ansible
+-----------------------
+On control machine
+steps:
+------
+1.sudo apt-get update
+2.sudo apt install software-properties-common
+3.sudo apt-add-repository ppa:ansible/ansible
+4.sudo apt update
+5.sudo apt install ansible
+
+On hosts
+steps:
+1.sudo apt-get update
+2.sudo apt-get install python
+
+keys:
+----
+on master/control:
+steps:
+------
+1.goto to .ssh folder
+2.isuue command ssh-keygen
+3.press enter for three times and then id_rsa and id_rsa_pub will be created.
+4.cat id_rds_pub command and copy the content
+
+on host
+steps:
+----
+1.sudo nano/vi authorised_keys
+and paste the content in the file and save it
+
+after completion of this step then one system can connect to the another system.
+
+To verify the systems are connecting or not issue the below command
+"ssh ubuntu@ipaddress"
+---------------------------------------------------------------------------------
+To connect the ansible to another systems the following steps we need to follow
+on host machine
+Step 1:sudo nano/vi /etc/ansible/hosts
+step 2:Enter this content
+       [any_name]
+       slave1 ansible_ssh_host="slave ip address"
+step-3:save it and exit.
+
+then 
+on control or master machine issue command "ansible -m ping all/name of slave/name of project"
+
+to connect to local host itself
+goto sudo vi /etc/ansible/hosts and add the following
+[local]
+localhost ansible_connection=local
+then issue command "ansible -m ping local"
+==================================================================================
+Writing the playbook
+
+---
+ -hosts:name of host
+  tasks:
+  name:
+...
+and to execute the playbook issue command:ansible-playbook name.yml
+
+
+
